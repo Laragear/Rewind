@@ -1,0 +1,70 @@
+{
+    "name": "laragear/rewind",
+    "description": "Travel back in time to see past model states.",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "keywords": [
+        "laravel",
+        "timemachine",
+        "rewind",
+        "history",
+        "states"
+    ],
+    "authors": [
+        {
+            "name": "Italo Israel Baeza Cabrera",
+            "email": "DarkGhostHunter@Gmail.com",
+            "role": "Developer",
+            "homepage": "https://github.com/sponsors/DarkGhostHunter"
+        }
+    ],
+    "support": {
+        "source": "https://github.com/Laragear/Rewind",
+        "issues": "https://github.com/Laragear/Rewind/issues"
+    },
+    "require": {
+        "php": "^8.1",
+        "laragear/meta-model": "^1.1",
+        "illuminate/database": "10.*|11.*",
+        "illuminate/support": "10.*|11.*"
+    },
+    "require-dev": {
+        "orchestra/testbench": "8.*|9.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laragear\\Rewind\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit --coverage-clover build/logs/clover.xml",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Laragear\\Rewind\\RewindServiceProvider"
+            ]
+        }
+    },
+    "funding": [
+        {
+            "type": "Github Sponsorship",
+            "url": "https://github.com/sponsors/DarkGhostHunter"
+        },
+        {
+            "type": "Paypal",
+            "url": "https://paypal.me/darkghosthunter"
+        }
+    ]
+}
