@@ -14,8 +14,6 @@ class LimitStatesScope implements Scope
 {
     /**
      * Create a new Scope instance.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model&\Tests\HasRewindTest  $target
      */
     public function __construct(protected Model $target)
     {
@@ -23,12 +21,9 @@ class LimitStatesScope implements Scope
     }
 
     /**
-     * Apply the scope to a given Eloquent query builder.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model&\Laragear\Rewind\HasRewind  $model
-     * @return void
+     * @inheritdoc
      */
-    public function apply(Builder $builder, Model $model)
+    public function apply(Builder $builder, Model $model): void
     {
         [$amount, $datetime] = $this->getLimits();
 
@@ -45,7 +40,7 @@ class LimitStatesScope implements Scope
      */
     protected function getLimits(): array
     {
-        $value = $this->target->rewindLimit();
+        $value = $this->target->rewindLimit(); // @phpstan-ignore-line
 
         if (!$value) {
             return [null, null];

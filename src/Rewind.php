@@ -118,7 +118,7 @@ class Rewind
      */
     public function find(int $id): Model
     {
-        $state = $this->queryStates()
+        $state = $this->queryStates()  // @phpstan-ignore-line
             ->findOrFail($id, ['rewindable_type', 'data'])
             ->instanceRewindable(); // @phpstan-ignore-line
 
@@ -132,9 +132,9 @@ class Rewind
      */
     public function findLatest(): Model
     {
-        return $this->queryStates()->orderByDesc('id')->firstOrFail([
+        return $this->queryStates()->orderByDesc('id')->firstOrFail([ // @phpstan-ignore-line
             'rewindable_type', 'data'
-        ])->instanceRewindable(); // @phpstan-ignore-line
+        ])->instanceRewindable();
     }
 
     /**
@@ -142,9 +142,9 @@ class Rewind
      */
     public function findOldest(): Model
     {
-        return $this->queryStates()->orderBy('id')->firstOrFail([
+        return $this->queryStates()->orderBy('id')->firstOrFail([ // @phpstan-ignore-line
             'rewindable_type', 'data'
-        ])->instanceRewindable(); // @phpstan-ignore-line
+        ])->instanceRewindable();
     }
 
     /**
@@ -172,8 +172,8 @@ class Rewind
     {
         return $this->queryStates() // @phpstan-ignore-line
             ->get(['rewindable_type', 'data'])
-            ->map(static function (Models\RewindState $model): Model {
-                return $model->instanceRewindable(); // @phpstan-ignore-line
+            ->map(static function (Models\RewindState $model): Model { // @phpstan-ignore-line
+                return $model->instanceRewindable();
             });
     }
 
@@ -263,8 +263,8 @@ class Rewind
     public function prune(bool $includeKept = false): void
     {
         // If the target model has no set limit, we will just not execute this.
-        if ($this->target->rewindLimit()) { // @phpstan-ignore-line
-            $this->query()->whereNotIn('id',
+        if ($this->target->rewindLimit()) {
+            $this->query()->whereNotIn('id', // @phpstan-ignore-line
                 $this->queryStates()
                 ->select('id')
                 ->unless($includeKept)
