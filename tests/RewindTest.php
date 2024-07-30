@@ -37,10 +37,7 @@ class RewindTest extends TestCase
                 $table->timestamp('ends_at')->nullable();
                 $table->timestamps();
             });
-    }
 
-    protected function defineDatabaseMigrationsAfterDatabaseRefreshed()
-    {
         $this->model = TestModel::create([
             'title' => 'test_title',
             'starts_at' => now()
