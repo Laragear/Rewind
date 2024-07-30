@@ -6,7 +6,6 @@ use DateTimeInterface;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder as SchemaBuilder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Event;
 use Laragear\Rewind\Events\StateCreated;
@@ -18,8 +17,6 @@ use function now;
 
 class HasRewindTest extends TestCase
 {
-    use RefreshDatabase;
-
     protected function defineDatabaseMigrations(): void
     {
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');

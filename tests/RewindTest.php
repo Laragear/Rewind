@@ -5,7 +5,6 @@ namespace Tests;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder as SchemaBuilder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Laragear\Rewind\Events\StateCreated;
 use Laragear\Rewind\Events\StateDeleted;
@@ -18,8 +17,6 @@ use function now;
 
 class RewindTest extends TestCase
 {
-    use RefreshDatabase;
-
     protected TestModel $model;
 
     protected function defineDatabaseMigrations(): void
@@ -37,11 +34,18 @@ class RewindTest extends TestCase
                 $table->timestamp('ends_at')->nullable();
                 $table->timestamps();
             });
+    }
 
-        $this->model = TestModel::create([
-            'title' => 'test_title',
-            'starts_at' => now()
-        ]);
+    protected function setUp(): void
+    {
+        $this->afterApplicationCreated(function (): void {
+            $this->model = TestModel::create([
+                'title' => 'test_title',
+                'starts_at' => now()
+            ]);
+        });
+
+        parent::setUp();
     }
 
     public function test_to(): void

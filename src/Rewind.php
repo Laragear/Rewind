@@ -120,7 +120,7 @@ class Rewind
     {
         $state = $this->queryStates()  // @phpstan-ignore-line
             ->findOrFail($id, ['rewindable_type', 'data'])
-            ->instanceRewindable(); // @phpstan-ignore-line
+            ->instanceRewindable();
 
         StateRetrieved::dispatch($this->target, $state);
 
@@ -263,13 +263,13 @@ class Rewind
     public function prune(bool $includeKept = false): void
     {
         // If the target model has no set limit, we will just not execute this.
-        if ($this->target->rewindLimit()) {
+        if ($this->target->rewindLimit()) { // @phpstan-ignore-line
             $this->query()->whereNotIn('id', // @phpstan-ignore-line
                 $this->queryStates()
                 ->select('id')
                 ->unless($includeKept)
                 ->whereNot('is_kept', true)
-            )->withoutGlobalScopes()->delete(); // @phpstan-ignore-line
+            )->withoutGlobalScopes()->delete();
 
             StatesPruned::dispatch($this->target, $includeKept);
         }
