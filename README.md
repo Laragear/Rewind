@@ -2,10 +2,11 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laragear/rewind.svg)](https://packagist.org/packages/laragear/webauthn)
 [![Latest stable test run](https://github.com/Laragear/Rewind/actions/workflows/php.yml/badge.svg?branch=1.x)](https://github.com/Laragear/Rewind/actions/workflows/php.yml)
-[![Codecov coverage](https://codecov.io/gh/Laragear/Rewind/branch/1.x/graph/badge.svg?token=HIngrvQeOj)](https://codecov.io/gh/Laragear/Rewind)
-[![CodeClimate Maintainability](https://api.codeclimate.com/v1/badges/39841b40ab4b05b8f9d3/maintainability)](https://codeclimate.com/github/Laragear/Rewind/maintainability)
+[![Codecov coverage](https://codecov.io/gh/Laragear/Rewind/branch/1.x/graph/badge.svg?token=kgZpKLKR1j)](https://codecov.io/gh/Laragear/Rewind)
+[![CodeClimate Maintainability](https://api.codeclimate.com/v1/badges/76106373d3eb60101bf6/maintainability)](https://codeclimate.com/github/Laragear/Rewind/maintainability)
 [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=Laragear_Rewind&metric=alert_status)](https://sonarcloud.io/dashboard?id=Laragear_Rewind)
 [![Laravel Octane Compatibility](https://img.shields.io/badge/Laravel%20Octane-Compatible-success?style=flat&logo=laravel)](https://laravel.com/docs/11.x/octane#introduction)
+
 
 Travel back in time to see past model states, and restore them in one line.
 
