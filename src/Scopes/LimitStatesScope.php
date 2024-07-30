@@ -42,10 +42,6 @@ class LimitStatesScope implements Scope
     {
         $value = $this->target->rewindLimit(); // @phpstan-ignore-line
 
-        if (!$value) {
-            return [null, null];
-        }
-
         if (is_array($value)) {
             return is_int($value[0]) ? [$value[0], $value[1]] : [$value[1], $value[0]];
         }
