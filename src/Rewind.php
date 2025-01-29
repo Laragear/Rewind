@@ -58,7 +58,7 @@ class Rewind
     /**
      * Rewinds the model to the latest state.
      */
-    public function toLatest(string|array $only = null): Model
+    public function toLatest(string|array|null $only = null): Model
     {
         $attributes = $this->findLatest()->getAttributes();
 
@@ -74,7 +74,7 @@ class Rewind
     /**
      * Rewinds the model to the oldest state.
      */
-    public function toOldest(string|array $only = null): Model
+    public function toOldest(string|array|null $only = null): Model
     {
         $attributes = $this->findOldest()->getAttributes();
 
