@@ -17,7 +17,7 @@ class RewindServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (method_exists($this, 'publishesMigrations')) {
+        if (method_exists($this, 'publishesMigrations')) { // @phpstan-ignore-line
             $this->publishesMigrations([static::MIGRATIONS => $this->app->databasePath('migrations')], 'migrations');
         } else {
             $this->publishes([

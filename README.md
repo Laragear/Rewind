@@ -165,7 +165,7 @@ public function update(Article $article, Request $request)
     
     return $article;
 }
-``` 
+```
 
 The `create()` method allows [keep the state](#keep-state) from automatic pruning, and also skip automatic pruning.
 
@@ -258,7 +258,7 @@ $pastArticle = Article::find(1)->rewind()->find(456);
 
 > [!CAUTION]
 > 
-> Because the State ID is expected to exist, a `ModelNotFoundException` will be thrown if id doesn't exist. 
+> Because the State ID is expected to exist, a `ModelNotFoundException` will be thrown if id doesn't exist.
 
 ## Restoring States
 

@@ -1,0 +1,3 @@
+parameters:
+    ignoreErrors:
+        - '#Trait Laragear\\Rewind\\HasRewind is used zero times and is not analysed\.#'

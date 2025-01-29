@@ -58,7 +58,7 @@ class Rewind
     /**
      * Rewinds the model to the latest state.
      */
-    public function toLatest(string|array $only = null): Model
+    public function toLatest(string|array|null $only = null): Model
     {
         $attributes = $this->findLatest()->getAttributes();
 
@@ -74,7 +74,7 @@ class Rewind
     /**
      * Rewinds the model to the oldest state.
      */
-    public function toOldest(string|array $only = null): Model
+    public function toOldest(string|array|null $only = null): Model
     {
         $attributes = $this->findOldest()->getAttributes();
 
@@ -132,7 +132,7 @@ class Rewind
      */
     public function findLatest(): Model
     {
-        return $this->queryStates()->orderByDesc('id')->firstOrFail([ // @phpstan-ignore-line
+        return $this->queryStates()->orderByDesc('id')->firstOrFail([
             'rewindable_type', 'data'
         ])->instanceRewindable();
     }
@@ -142,7 +142,7 @@ class Rewind
      */
     public function findOldest(): Model
     {
-        return $this->queryStates()->orderBy('id')->firstOrFail([ // @phpstan-ignore-line
+        return $this->queryStates()->orderBy('id')->firstOrFail([
             'rewindable_type', 'data'
         ])->instanceRewindable();
     }
@@ -264,7 +264,7 @@ class Rewind
     {
         // If the target model has no set limit, we will just not execute this.
         if ($this->target->rewindLimit()) { // @phpstan-ignore-line
-            $this->query()->whereNotIn('id', // @phpstan-ignore-line
+            $this->query()->whereNotIn('id',
                 $this->queryStates()
                 ->select('id')
                 ->unless($includeKept)
