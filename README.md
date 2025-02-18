@@ -2,8 +2,8 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laragear/rewind.svg)](https://packagist.org/packages/laragear/webauthn)
 [![Latest stable test run](https://github.com/Laragear/Rewind/actions/workflows/php.yml/badge.svg?branch=1.x)](https://github.com/Laragear/Rewind/actions/workflows/php.yml)
-[![Codecov coverage](https://codecov.io/gh/Laragear/Rewind/branch/1.x/graph/badge.svg?token=kgZpKLKR1j)](https://codecov.io/gh/Laragear/Rewind)
-[![CodeClimate Maintainability](https://api.codeclimate.com/v1/badges/76106373d3eb60101bf6/maintainability)](https://codeclimate.com/github/Laragear/Rewind/maintainability)
+[![Codecov coverage](https://codecov.io/gh/Laragear/Rewind/graph/badge.svg?token=kgZpKLKR1j)](https://codecov.io/gh/Laragear/Rewind)
+[![Maintainability](https://qlty.sh/badges/41ea9280-5115-4515-8c23-c3c17451e3e0/maintainability.svg)](https://qlty.sh/gh/Laragear/projects/Rewind)
 [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=Laragear_Rewind&metric=alert_status)](https://sonarcloud.io/dashboard?id=Laragear_Rewind)
 [![Laravel Octane Compatibility](https://img.shields.io/badge/Laravel%20Octane-Compatible-success?style=flat&logo=laravel)](https://laravel.com/docs/11.x/octane#introduction)
 
