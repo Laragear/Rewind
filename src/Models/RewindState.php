@@ -4,7 +4,9 @@ namespace Laragear\Rewind\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Laragear\MetaModel\CustomizableModel;
+use Illuminate\Database\Schema\Blueprint;
+use Laragear\MetaModel\CustomMigration;
+use Laragear\MetaModel\HasCustomization;
 use Laragear\Rewind\Migrations\RewindStateMigration;
 
 /**
@@ -13,7 +15,7 @@ use Laragear\Rewind\Migrations\RewindStateMigration;
  */
 class RewindState extends Model
 {
-    use CustomizableModel;
+    use HasCustomization;
 
     /**
      * The name of the "updated at" column.
@@ -64,8 +66,19 @@ class RewindState extends Model
     /**
      * @inheritDoc
      */
-    protected static function migrationClass(): string
+    public static function migration(): CustomMigration
     {
-        return RewindStateMigration::class;
+        $createdAt = static::CREATED_AT;
+
+        return new CustomMigration(new static, function (Blueprint $table) use ($createdAt) { // @phpstan-ignore-line
+            $table->id();
+
+            $this->createMorph($table, 'rewindable'); // @phpstan-ignore-line
+
+            $table->json('data');
+            $table->boolean('is_kept')->default(false);
+
+            $table->timestamp($createdAt);
+        });
     }
 }

@@ -15,6 +15,11 @@ use Illuminate\Database\Eloquent\Model;
 trait HasRewind
 {
     /**
+     * If the current model class should be rewindable.
+     */
+    protected static bool $rewindable = true;
+
+    /**
      * Boot the current trait.
      */
     protected static function bootHasRewind(): void
@@ -40,17 +45,41 @@ trait HasRewind
     }
 
     /**
+     * Sets the current model class to be irreversible, or rewindable.
+     */
+    public static function irreversible(bool $rewind = false): void
+    {
+        static::$rewindable = $rewind;
+    }
+
+    /**
+     * Sets the current model class to be rewindable (reversible).
+     */
+    public static function reversible(): void
+    {
+        static::irreversible(true);
+    }
+
+    /**
+     * Checks if the current model class is rewindable or not.
+     */
+    public static function isRewindable(): bool
+    {
+        return static::$rewindable;
+    }
+
+    /**
      * Execute a callback without pushing rewindable states.
      */
-    public static function withoutCreatingStates(callable $closure): mixed
+    public static function whileIrreversible(callable $closure): mixed
     {
-        Rewind::$enabled = false;
+        static::irreversible();
 
         // This will always roll back the static property if the closure fails or succeeds.
         try {
             return $closure();
         } finally {
-            Rewind::$enabled = true;
+            static::reversible();
         }
     }
 

@@ -100,17 +100,19 @@ class HasRewindTest extends TestCase
         });
     }
 
-    public function test_without_pushing_states(): void
+    public function test_while_irreversible(): void
     {
         $event = Event::fake([StateCreated::class, StatesPruned::class]);
 
-        $result = TestModel::withoutCreatingStates(static function (): string {
+        $result = TestModel::whileIrreversible(static function (): string {
             TestModel::create([
                 'title' => 'test_title',
                 'starts_at' => now()
             ])->update([
                 'test_title'
             ]);
+
+            static::assertFalse(TestModel::isRewindable());
 
             return 'ok';
         });

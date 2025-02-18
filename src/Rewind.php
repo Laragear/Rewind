@@ -20,13 +20,6 @@ class Rewind
     use Conditionable;
 
     /**
-     * Determine if the rewind logic should run.
-     *
-     * @internal Developers should use Model::withoutCreatingStates(callable $callback) instead.
-     */
-    public static bool $enabled = true;
-
-    /**
      * The rewind relation to query.
      */
     protected MorphMany $relation;
@@ -244,7 +237,7 @@ class Rewind
             'is_kept' => $keep,
         ]);
 
-        if (static::$enabled) {
+        if ($this->target::isRewindable()) { // @phpstan-ignore-line
             $state->save();
 
             StateCreated::dispatch($this->target, $state);

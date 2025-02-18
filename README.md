@@ -22,9 +22,13 @@ $article->rewind()->toLatest();
 
 [![](.github/assets/support.png)](https://github.com/sponsors/DarkGhostHunter)
 
-Your support allows me to keep this package free, up-to-date and maintainable. Alternatively, you can **[spread the word!](http://twitter.com/share?text=I%20am%20using%20this%20cool%20PHP%20package&url=https://github.com%2FLaragear%2FWebAuthn&hashtags=PHP,Laravel)**
+Your support allows me to keep this package free, up-to-date and maintainable. Alternatively, you can **spread the word on social media**!
 
 ## Requirements
+
+- Laravel 11 or later
+
+## Installation
 
 Call Composer to retrieve the package.
 
@@ -42,7 +46,7 @@ php artisan vendor:publish --provider="Laragear\Rewind\RewindServiceProvider" --
 
 > [!TIP]
 >
-> You can [edit the migration](MIGRATIONS.md) by adding new columns before migrating, and also [change the table name](MIGRATIONS.md#custom-table-name).
+> You can [edit the migration](DATABASE.md#migration-customization) by adding new columns before migrating, and also [change the table name](DATABASE.md#model-customization).
 
 ```shell
 php artisan migrate
@@ -64,7 +68,7 @@ class Article extends Model
 }
 ```
 
-That's it. Next time you want restore the previous state of a model, use the `rewind()` method.
+That's it. Next time you want restore the previous state of a model, use the `rewind()` method and one of the helper methods, like `toLatest()`.
 
 ```php
 use App\Models\Article;
@@ -84,7 +88,7 @@ States are _reactive_, not _proactive_. In other words, states are saved _after_
 
 ## Saving States
 
-States are created automatically when the model is created or updated. There is nothing you need to do to ensure the state has been persisted, but you can [hear for the `StatePushed` event](#events).
+States are created automatically when the model is created or updated. There is nothing you need to do to ensure the state has been persisted, but you can [listen for the `StatePushed` event](#events).
 
 ```php
 use App\Models\Article;
@@ -113,9 +117,21 @@ public function update(Article $article, Request $request)
 
 ### Without creating states
 
-Sometimes you will want to avoid creating a replica when a model is created or updated.  
+Sometimes you will want to avoid creating a replica when a model is created or updated.
 
-To do that, use the `withoutCreatingStates()` method of your model with a callback. Inside the callback, the states won't be pushed to the database.
+You may use the `irreversible()` to disable rewinds, and `reversible()` to enable it again.
+
+```php
+use App\Models\Article;
+
+Article::irreversible();
+
+$article = Article::create($validated)
+
+Article::reversible();
+```
+
+Alternatively, you may use the `whileIrreversible()` method of your model with a callback. Inside the callback, rewinding will be disabled so states won't be pushed to the database.
 
 ```php
 use App\Models\Article;
@@ -128,7 +144,7 @@ public function store(Request $request)
     ]);
     
     // Create an article but don't save the first state.
-    return Article::withoutCreatingStates(fn() => Article::create($validated));
+    return Article::whileIrreversible(fn() => Article::create($validated));
 }
 ```
 
@@ -559,7 +575,7 @@ public function setAttributesFromRewindState(array $attributes): void
 }
 ``` 
 
-## [Migrations](MIGRATIONS.md)
+## [Migrations](DATABASE.md)
 
 ## Laravel Octane compatibility
 
@@ -578,4 +594,4 @@ If you discover any security related issues, please email darkghosthunter@gmail.
 
 This specific package version is licensed under the terms of the [MIT License](LICENSE.md), at time of publishing.
 
-[Laravel](https://laravel.com) is a Trademark of [Taylor Otwell](https://github.com/TaylorOtwell/). Copyright © 2011-2024 Laravel LLC.
+[Laravel](https://laravel.com) is a Trademark of [Taylor Otwell](https://github.com/TaylorOtwell/). Copyright © 2011-2025 Laravel LLC.
