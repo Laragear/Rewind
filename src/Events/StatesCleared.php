@@ -5,7 +5,7 @@ namespace Laragear\Rewind\Events;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 
-class StatesCleared
+readonly class StatesCleared
 {
     use Dispatchable;
 

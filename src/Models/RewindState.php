@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Schema\Blueprint;
 use Laragear\MetaModel\CustomMigration;
 use Laragear\MetaModel\HasCustomization;
-use Laragear\Rewind\Migrations\RewindStateMigration;
 
 /**
+ * @mixin \Illuminate\Database\Eloquent\Builder<static>
+ *
  * @property-read array $data
  * @property-read bool $is_kept
  */
@@ -19,10 +20,8 @@ class RewindState extends Model
 
     /**
      * The name of the "updated at" column.
-     *
-     * @var string|null
      */
-    public const UPDATED_AT = null;
+    public const null UPDATED_AT = null;
 
     /**
      * The attributes that should be cast.
@@ -66,11 +65,11 @@ class RewindState extends Model
     /**
      * @inheritDoc
      */
-    public static function migration(): CustomMigration
+    protected static function makeMigration(): ?CustomMigration
     {
-        $createdAt = static::CREATED_AT;
+        $createdAt = static::make()->getCreatedAtColumn();
 
-        return new CustomMigration(new static, function (Blueprint $table) use ($createdAt) { // @phpstan-ignore-line
+        return CustomMigration::make(function (Blueprint $table) use ($createdAt) {
             $table->id();
 
             $this->createMorph($table, 'rewindable'); // @phpstan-ignore-line

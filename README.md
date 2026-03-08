@@ -5,10 +5,10 @@
 [![Codecov coverage](https://codecov.io/gh/Laragear/Rewind/graph/badge.svg?token=kgZpKLKR1j)](https://codecov.io/gh/Laragear/Rewind)
 [![Maintainability](https://qlty.sh/badges/41ea9280-5115-4515-8c23-c3c17451e3e0/maintainability.svg)](https://qlty.sh/gh/Laragear/projects/Rewind)
 [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=Laragear_Rewind&metric=alert_status)](https://sonarcloud.io/dashboard?id=Laragear_Rewind)
-[![Laravel Octane Compatibility](https://img.shields.io/badge/Laravel%20Octane-Compatible-success?style=flat&logo=laravel)](https://laravel.com/docs/11.x/octane#introduction)
+[![Laravel Octane Compatibility](https://img.shields.io/badge/Laravel%20Octane-Compatible-success?style=flat&logo=laravel)](https://laravel.com/docs/13.x/octane#introduction)
 
 
-Travel back in time to see past model states, and restore them in one line.
+Travel back in time to see past model states and restore them in one line.
 
 ```php
 use App\Models\Article;
@@ -26,7 +26,8 @@ Your support allows me to keep this package free, up-to-date and maintainable. A
 
 ## Requirements
 
-- Laravel 11 or later
+* PHP 8.3 or later
+* Laravel 12 or later
 
 ## Installation
 
@@ -588,10 +589,10 @@ There should be no problems using this package with Laravel Octane.
 
 ## Security
 
-If you discover any security related issues, please email darkghosthunter@gmail.com instead of using the issue tracker.
+If you discover any security-related issues, please email darkghosthunter@gmail.com instead of using the issue tracker.
 
 # License
 
-This specific package version is licensed under the terms of the [MIT License](LICENSE.md), at time of publishing.
+This specific package version is licensed under the terms of the [MIT License](LICENSE.md), at the time of publishing.
 
-[Laravel](https://laravel.com) is a Trademark of [Taylor Otwell](https://github.com/TaylorOtwell/). Copyright © 2011-2025 Laravel LLC.
+[Laravel](https://laravel.com) is a Trademark of [Taylor Otwell](https://github.com/TaylorOtwell/). Copyright © 2011–2026 Laravel LLC.

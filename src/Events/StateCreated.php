@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Laragear\Rewind\Models\RewindState;
 
-class StateCreated
+readonly class StateCreated
 {
     use Dispatchable;
 

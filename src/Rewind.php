@@ -4,7 +4,7 @@ namespace Laragear\Rewind;
 
 use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilderContract;
 use Illuminate\Contracts\Database\Query\Builder as BuilderContract;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Arr;
@@ -111,9 +111,9 @@ class Rewind
      */
     public function find(int $id): Model
     {
-        $state = $this->queryStates()  // @phpstan-ignore-line
+        $state = $this->queryStates()
             ->findOrFail($id, ['rewindable_type', 'data'])
-            ->instanceRewindable();
+            ->instanceRewindable(); // @phpstan-ignore-line
 
         StateRetrieved::dispatch($this->target, $state);
 
@@ -127,7 +127,7 @@ class Rewind
     {
         return $this->queryStates()->orderByDesc('id')->firstOrFail([
             'rewindable_type', 'data'
-        ])->instanceRewindable();
+        ])->instanceRewindable(); // @phpstan-ignore-line
     }
 
     /**
@@ -137,17 +137,15 @@ class Rewind
     {
         return $this->queryStates()->orderBy('id')->firstOrFail([
             'rewindable_type', 'data'
-        ])->instanceRewindable();
+        ])->instanceRewindable(); // @phpstan-ignore-line
     }
 
     /**
      * Creates a new raw Eloquent Query Builder for the states.
-     *
-     * @return \Illuminate\Contracts\Database\Eloquent\Builder
      */
-    public function query(): BuilderContract
+    public function query(): EloquentBuilderContract
     {
-        return $this->relation->newQuery(); // @phpstan-ignore-line
+        return $this->relation->getQuery();
     }
 
     /**
@@ -161,7 +159,7 @@ class Rewind
     /**
      * Return all the past model instances.
      */
-    public function all(): Collection
+    public function all(): EloquentCollection
     {
         return $this->queryStates() // @phpstan-ignore-line
             ->get(['rewindable_type', 'data'])
@@ -262,7 +260,7 @@ class Rewind
                 ->select('id')
                 ->unless($includeKept)
                 ->whereNot('is_kept', true)
-            )->withoutGlobalScopes()->delete();
+            )->withoutGlobalScopes()->delete();  // @phpstan-ignore-line
 
             StatesPruned::dispatch($this->target, $includeKept);
         }

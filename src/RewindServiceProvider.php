@@ -8,7 +8,7 @@ use function now;
 
 class RewindServiceProvider extends ServiceProvider
 {
-    public const MIGRATIONS = __DIR__.'/../database/migrations';
+    public const string MIGRATIONS = __DIR__.'/../database/migrations';
 
     /**
      * Boot the application services.
